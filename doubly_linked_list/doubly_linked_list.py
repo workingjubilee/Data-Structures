@@ -52,19 +52,52 @@ class DoublyLinkedList:
         return self.length
 
     def add_to_head(self, value):
-        pass
+        if self.head != None:
+            self.head.insert_before(value)
+            self.head = self.head.prev
+        else:
+            self.head = ListNode(value)
+            self.tail = self.head
+        self.length += 1
 
     def remove_from_head(self):
-        pass
+        if self.head == None:
+            self.tail = None
+            self.length = 0
+            capture = None
+        else:
+            new_head = self.head.next
+            capture = self.head.value
+            self.head.delete()
+            self.head = new_head
+            self.length -= 1
+            if self.length == 0:
+                self.tail = None
+        return capture
 
     def add_to_tail(self, value):
-        to_add = ListNode(value)
-        self.tail.next = to_add
-        self.tail = to_add
-        return self.tail
+        if self.tail != None:
+            self.tail.insert_after(value)
+            self.tail = self.tail.next
+        else:
+            self.tail = ListNode(value)
+            self.head = self.tail
+        self.length += 1
 
     def remove_from_tail(self):
-        pass
+        if self.tail == None:
+            self.head = None
+            self.length = 0
+            capture = None
+        else:
+            new_tail = self.tail.prev
+            capture = self.tail.value
+            self.tail.delete()
+            self.tail = new_tail
+            self.length -= 1
+            if self.length == 0:
+                self.head = None
+        return capture
 
     def move_to_front(self, node):
         pass
@@ -73,7 +106,16 @@ class DoublyLinkedList:
         pass
 
     def delete(self, node):
-        pass
+        '''
+        So it turns out there's no test case for delete(middle_values)
+        "what if they have three values and the delete is against the middle?"
+        e.g. if I make three nodes, and the .delete() must remove the middle
+        normally I should have to iterate over the entire list to find it
+        '''
+        if self.head == node:
+            self.remove_from_head()
+        elif self.tail == node:
+            self.remove_from_tail()
 
     def get_max(self):
         pass
