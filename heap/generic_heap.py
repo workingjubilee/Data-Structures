@@ -13,7 +13,10 @@ class Heap:
 
     def delete(self):
         heap = self.storage
-        head = heap.pop(0)
+        neck = len(heap) - 1
+        head = heap[0]
+        heap[0] = heap[neck]
+        heap.pop(neck)
         self._sift_down(0)
 
         return head
@@ -43,7 +46,7 @@ class Heap:
         heap = self.storage
         compare = self.comparator
 
-        if index*2+2 >= len(heap):
+        if index*2+2 > len(heap):
             return index
 
         branches = (index*2)+1, (index*2)+2
@@ -65,6 +68,4 @@ class Heap:
             heap[index], heap[swap] = heap[swap], heap[index]
             return self._sift_down(swap)
         else:
-            self._sift_down(branches[0])
-            self._sift_down(branches[1])
             return index
