@@ -18,43 +18,40 @@ class BinarySearchTree:
         self.left = None
         self.right = None
 
-    def seek(self, value, cb=equal_to(None)):
-        branch = self
+    def _seek(self, value, passing=equal_to(None)):
         if value >= self.value:
-            if cb(self.right):
-                return branch
-            else:
-                branch = self.right
-                return branch.seek(value)
-        elif value < self.value:
-            if cb(self.left):
+            if passing(self.right):
                 return self
             else:
-                branch = self.left
-                return branch.seek(value)
+                return self.right._seek(value)
+        elif value < self.value:
+            if passing(self.left):
+                return self
+            else:
+                return self.left._seek(value)
 
     def insert(self, value):
-        branch = self.seek(value)
-        # print(branch.value, branch.right, branch.left)
+        branch = self._seek(value)
+
         if value >= branch.value:
             branch.right = BinarySearchTree(value)
         else:
             branch.left = BinarySearchTree(value)
 
     def contains(self, target):
-        maybe_this = equal_to(target)
-        branch = self.seek(target, maybe_this)
-        return maybe_this(branch.value)
+        maybe_this_ = equal_to(target)
+        branch = self._seek(target, maybe_this_)
+        return maybe_this_(branch.value)
 
     def get_max(self):
         infinity = inf
-        branch = self.seek(infinity)
+        branch = self._seek(infinity)
         return branch.value
 
     def for_each(self, cb):
-      cb(self.value)
-      if self.left != None:
-          self.left.for_each(cb)
-      if self.right != None:
-          self.right.for_each(cb)
+        cb(self.value)
 
+        if self.left != None:
+            self.left.for_each(cb)
+        if self.right != None:
+            self.right.for_each(cb)

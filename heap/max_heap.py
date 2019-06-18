@@ -26,10 +26,9 @@ class Heap:
 
     def _bubble_up(self, index):
         if index == 0:
-            return
+            return index
 
         heap = self.storage
-
         parent = (index-1) // 2
 
         if heap[parent] > heap[index]:

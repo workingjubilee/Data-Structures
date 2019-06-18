@@ -123,8 +123,8 @@ class DoublyLinkedList:
 
     def delete(self, node):
         '''
-        So it turns out there's no test case for delete(middle_values)
-        "what if they have three values and the delete is against the middle?"
+        So it turns out there's no test case for delete(middle_node)
+        "what if they have three nodes and the delete is against the middle?"
         e.g. if I make three nodes, and the .delete() must remove the middle
         normally I should have to iterate over the entire list to find it
         '''
@@ -133,9 +133,9 @@ class DoublyLinkedList:
         elif self.tail == node:
             self.remove_from_tail()
         # Not needed due to absence of test cases for it:
-        # else:
-        #     node.delete()
-        #     self.length -= 1
+        else:
+            node.delete()
+            self.length -= 1
 
     def get_max(self):
         if self.head == None:

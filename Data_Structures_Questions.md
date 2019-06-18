@@ -58,7 +58,7 @@ O(1).
 
 10. What is the runtime complexity of `DoublyLinkedList.delete`?
 
-O(1) for all of these, except that if you want to get a specific value from the middle of the list, like performing an array operation, then it's O(n). Operations like DoublyLinkedList.delete are O(1) because they assume the user has a reference back to that node, which increases the space complexity. Just from the head or tail, though, is O(1).
+O(1) for all of these, except that if you want to get a specific value from the middle of the list, like performing an array operation, or insert after a given item, then it's O(n), though the Ө will be Өn/2. Operations like DoublyLinkedList.delete are O(1) because they assume the user has a reference back to that node, which increases the space complexity. Just from the head or tail, though, is O(1), because in a DLL we are always going to track that anyways.
 
     a. Compare the runtime of the doubly linked list's `delete` method with the worst-case runtime of the JS `Array.splice` method. Which method generally performs better?
 
